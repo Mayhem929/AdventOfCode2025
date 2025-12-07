@@ -1,8 +1,6 @@
 use std::fs;
 
-fn problem1() {
-    let input = fs::read_to_string("data/day4.txt").unwrap();
-
+pub fn problem1(input: &str) -> i128 {
     let map: Vec<Vec<u8>> = input
         .lines()
         .map(|line| line.chars().map(|c| if c == '@' {1} else {0}).collect())
@@ -33,14 +31,11 @@ fn problem1() {
         }
     }
 
-    println!("{}", rolls);
+    return rolls;
 
 }
 
-fn problem2() {
-
-    let input = fs::read_to_string("data/day4.txt").unwrap();
-
+pub fn problem2(input: &str) -> i128 {
     let mut map: Vec<Vec<u8>> = input
         .lines()
         .map(|line| line.chars().map(|c| if c == '@' {1} else {0}).collect())
@@ -88,12 +83,13 @@ fn problem2() {
         }
     }
 
-    println!("{}", total);
+    return total;
 }
 
 pub fn run() {
+    let input = fs::read_to_string("data/day4.txt").unwrap();
 
-    problem1();
-    problem2();
+    println!("{}", problem1(&input));
+    println!("{}", problem2(&input));
 
 }

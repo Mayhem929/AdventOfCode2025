@@ -1,8 +1,6 @@
 use std::fs;
 
-fn problem1() {
-    let input = fs::read_to_string("data/day6.txt").unwrap();
-
+pub fn problem1(input: &str) -> i128 {
     let mut numbers = input.lines().collect::<Vec<&str>>();
     let mut operations = numbers.split_off(numbers.len()-1);
     operations = operations[0].split_whitespace().collect();
@@ -14,27 +12,24 @@ fn problem1() {
         if operations[i] == "*" {
             let mut to_add = 1;
             for j in 0..mat.len() {
-                to_add *= mat[j][i].parse::<i64>().unwrap();
+                to_add *= mat[j][i].parse::<i128>().unwrap();
             }
             total += to_add;
         }
         else {
             let mut to_add = 0;
             for j in 0..mat.len() {
-                to_add += mat[j][i].parse::<i64>().unwrap();
+                to_add += mat[j][i].parse::<i128>().unwrap();
             }
             total += to_add;
         }
     }
 
-    println!("{:?}", total);
-
+    return total;
 }
 
 
-fn problem2() {
-    let input = fs::read_to_string("data/day6.txt").unwrap();
-
+pub fn problem2(input: &str) -> i128 {
     let mut numbers = input.lines().collect::<Vec<&str>>();
     let mut operations = numbers.split_off(numbers.len()-1);
     operations = operations[0].split_whitespace().collect();
@@ -53,7 +48,7 @@ fn problem2() {
             }
         }
 
-        if let Ok(num) = num_str.parse::<i64>() {
+        if let Ok(num) = num_str.parse::<i128>() {
             if operations[op] == "*" {
                 to_add *= num;
             }
@@ -70,12 +65,13 @@ fn problem2() {
 
     total += to_add;
 
-    println!("{:?}", total);
+    return total;
 }
 
 pub fn run() {
+    let input = fs::read_to_string("data/day6.txt").unwrap();
 
-    problem1();
-    problem2();
+    println!("{}", problem1(&input));
+    println!("{}", problem2(&input));
 
 }

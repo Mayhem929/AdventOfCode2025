@@ -1,19 +1,17 @@
 use std::fs;
 
-fn problem1() {
-    let input = fs::read_to_string("data/day5.txt").unwrap();
-
-    let mut ranges: Vec<(u128, u128)> = Vec::new();
-    let mut ids: Vec<u128> = Vec::new();
+pub fn problem1(input: &str) -> i128 {
+    let mut ranges: Vec<(i128, i128)> = Vec::new();
+    let mut ids: Vec<i128> = Vec::new();
 
     for line in input.lines().filter(|l| !l.is_empty()) {
         if line.contains('-') {
             let mut parts = line.split('-');
-            let start = parts.next().unwrap().parse::<u128>().unwrap();
-            let end = parts.next().unwrap().parse::<u128>().unwrap();
+            let start = parts.next().unwrap().parse::<i128>().unwrap();
+            let end = parts.next().unwrap().parse::<i128>().unwrap();
             ranges.push((start, end));
         } else {
-            ids.push(line.parse::<u128>().unwrap());
+            ids.push(line.parse::<i128>().unwrap());
         }
     }
     
@@ -30,27 +28,25 @@ fn problem1() {
         }
     }
 
-    println!("{fresh}");
+    return fresh;
 }
 
 
-fn problem2() {
-    let input = fs::read_to_string("data/day5.txt").unwrap();
-
-    let mut ranges: Vec<(u128,u128)> = Vec::new();
+pub fn problem2(input: &str) -> i128 {
+    let mut ranges: Vec<(i128,i128)> = Vec::new();
 
     for line in input.lines() {
         if line.contains('-') {
             let mut parts = line.split('-');
-            let start: u128 = parts.next().unwrap().parse().unwrap();
-            let end: u128 = parts.next().unwrap().parse().unwrap();
+            let start: i128 = parts.next().unwrap().parse().unwrap();
+            let end: i128 = parts.next().unwrap().parse().unwrap();
             ranges.push((start, end));
         }
     }
 
     ranges.sort_by_key(|r| r.0);
 
-    let mut merged: Vec<(u128,u128)> = Vec::new();
+    let mut merged: Vec<(i128,i128)> = Vec::new();
 
     for (start, end) in ranges {
         if let Some(last) = merged.last_mut() {
@@ -66,14 +62,15 @@ fn problem2() {
         }
     }
 
-    let total: u128 = merged.iter().map(|(s,e)| e - s + 1).sum();
+    let total: i128 = merged.iter().map(|(s,e)| e - s + 1).sum();
 
-    println!("{total}");
+    return total;
 }
 
 pub fn run() {
+    let input = fs::read_to_string("data/day5.txt").unwrap();
 
-    problem1();
-    problem2();
+    println!("{}", problem1(&input));
+    println!("{}", problem2(&input));
 
 }

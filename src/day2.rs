@@ -1,40 +1,39 @@
 use std::fs;
 
-fn problem1() {
-    let input = fs::read_to_string("data/day2.txt").unwrap();
+pub fn problem1(input: &str) -> i128 {
     let ranges: Vec<&str> = input
         .lines()
         .flat_map(|line| line.split(','))
         .map(|s| s.trim())
         .collect();
 
-    let mut total: u128 = 0;
+    let mut total: i128 = 0;
 
     for range in ranges {
         let (l_bound, u_bound) = range.split_once('-').unwrap();
-        let l_bound_int: u128 = l_bound.parse().unwrap();
-        let u_bound_int: u128 = u_bound.parse().unwrap();
+        let l_bound_int: i128 = l_bound.parse().unwrap();
+        let u_bound_int: i128 = u_bound.parse().unwrap();
         
         let lower_half = l_bound.len() / 2;
-        let mut start: u128 = if lower_half == 0 {l_bound[..1].parse().unwrap()} else {l_bound[..lower_half].parse().unwrap()};
+        let mut start: i128 = if lower_half == 0 {l_bound[..1].parse().unwrap()} else {l_bound[..lower_half].parse().unwrap()};
 
         let upper_half = u_bound.len() / 2 + if u_bound.len() % 2 == 1 {1} else {0};
-        let end: u128 = if upper_half == 0 {u_bound[..1].parse().unwrap()} else {u_bound[..upper_half].parse().unwrap()};
+        let end: i128 = if upper_half == 0 {u_bound[..1].parse().unwrap()} else {u_bound[..upper_half].parse().unwrap()};
 
 
         while start <= end {
-            let doubled: u128 = format!("{}{}", start, start).parse().unwrap();
+            let doubled: i128 = format!("{}{}", start, start).parse().unwrap();
             if doubled >= l_bound_int && doubled <= u_bound_int {
                 total += doubled;
             }
             start += 1;
         }
     }
-    println!("{}", total);
+    return total;
 }
 
 
-fn is_repeated_pattern(n: u128) -> bool {
+fn is_repeated_pattern(n: i128) -> bool {
     let s = n.to_string();
     let len = s.len();
 
@@ -56,22 +55,19 @@ fn is_repeated_pattern(n: u128) -> bool {
 }
 
 
-fn problem2() {
-    let input = fs::read_to_string("data/day2.txt").unwrap();
-
-    // Limpia y separa los rangos
+pub fn problem2(input: &str) -> i128 {
     let ranges: Vec<&str> = input
         .lines()
         .flat_map(|line| line.split(','))
         .map(|s| s.trim())
         .collect();
 
-    let mut total: u128 = 0;
+    let mut total: i128 = 0;
 
     for range in ranges {
         let (l_bound, u_bound) = range.split_once('-').unwrap();
-        let l_bound: u128 = l_bound.parse().unwrap();
-        let u_bound: u128 = u_bound.parse().unwrap();
+        let l_bound: i128 = l_bound.parse().unwrap();
+        let u_bound: i128 = u_bound.parse().unwrap();
 
         for n in l_bound..=u_bound {
             if is_repeated_pattern(n) {
@@ -80,13 +76,14 @@ fn problem2() {
         }
     }
 
-    println!("{}", total);
+    return total;
 }
 
 pub fn run() {
     
-    problem1();
+    let input = fs::read_to_string("data/day2.txt").unwrap();
 
-    problem2();
+    println!("{}", problem1(&input));
+    println!("{}", problem2(&input));
     
 }

@@ -1,7 +1,6 @@
 use std::fs;
 
-fn problem1() {
-    let input = fs::read_to_string("data/day7.txt").unwrap();
+pub fn problem1(input: &str) -> i128 {
     let mut lines = input.lines();
     let start = lines.next();
 
@@ -26,17 +25,16 @@ fn problem1() {
         line_opt = lines.next();
     }
 
-    println!("{}", sum);
+    sum
 
 }
 
 
-fn problem2() {
-    let input = fs::read_to_string("data/day7.txt").unwrap();
+pub fn problem2(input: &str) -> i128 {
     let mut lines = input.lines();
     let start = lines.next().unwrap();
 
-    let mut dp: Vec<u128> = start
+    let mut dp: Vec<i128> = start
         .chars()
         .map(|c| if c == '.' {0} else {1})
         .collect(); // cada celda representa el numero de formas de llegar a esa casilla
@@ -55,12 +53,13 @@ fn problem2() {
         }
     }
 
-    println!("{}", dp.iter().sum::<u128>());
+    dp.iter().sum::<i128>()
 }
 
 pub fn run() {
+    let input = fs::read_to_string("data/day7.txt").unwrap();
 
-    problem1();
-    problem2();
+    println!("{}", problem1(&input));
+    println!("{}", problem2(&input));
 
 }
