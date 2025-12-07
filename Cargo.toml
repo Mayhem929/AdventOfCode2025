@@ -1,7 +1,6 @@
 [package]
-name = "day4"
+name = "AdventOfCode2025"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-convolve2d = "0.2"

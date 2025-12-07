@@ -1,5 +1,4 @@
 use std::fs;
-use std::collections::{HashMap, HashSet};
 
 fn problem1() {
     let input = fs::read_to_string("data/day5.txt").unwrap();
@@ -72,7 +71,7 @@ fn problem2() {
     println!("{total}");
 }
 
-fn main() {
+pub fn run() {
 
     problem1();
     problem2();

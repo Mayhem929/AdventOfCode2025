@@ -1,6 +1,6 @@
 use std::fs;
 
-fn main() {
+pub fn run() {
     let input = fs::read_to_string("../data/day1.txt").unwrap();
 
     let mut pos = 50;
@@ -22,7 +22,6 @@ fn main() {
 
     println!("{}", hits);
 
-    let mut last_pos = 50;
     pos = 50;
     hits = 0;
 
@@ -47,14 +46,6 @@ fn main() {
 
         pos = (pos + delta).rem_euclid(100);
 
-        
-
-        last_pos = pos;
-
-        println!("{}", line);
-        println!("pos: {}", pos);
-        println!("hits: {}", hits);
-        println!();
     }
 
     println!("{}", hits);

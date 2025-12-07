@@ -58,9 +58,10 @@ fn problem2(num: usize) {
 
     println!("{}", total);
 }
-fn main() {
+
+pub fn run() {
     
-    problem2(2);
+    problem1();
 
     problem2(12);
     

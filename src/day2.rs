@@ -83,7 +83,7 @@ fn problem2() {
     println!("{}", total);
 }
 
-fn main() {
+pub fn run() {
     
     problem1();
 
